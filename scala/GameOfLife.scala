@@ -3,17 +3,10 @@
  */
 class GameOfLife {
 
-  def neighbors(p : (Int, Int)): List[(Int, Int)] =
-    List(
-      (p._1 - 1, p._2 - 1),
-      (p._1,     p._2 - 1),
-      (p._1 + 1, p._2 - 1),
-      (p._1 - 1, p._2),
-      (p._1 + 1, p._2),
-      (p._1 - 1, p._2 + 1),
-      (p._1,     p._2 + 1),
-      (p._1 + 1, p._2 + 1)
-    )
+  def neighbors(p : (Int, Int)) = 
+      for (i <- p._1 - 1 until p._1 + 2;
+           j <- p._2 - 1 until p._2 + 2
+           if (i != p._1 || j != p._2)) yield (i, j)
 
   def neighbors(cells: List[(Int, Int)]): List[(Int, Int)] =
     cells.flatMap(p => neighbors(p)).distinct
